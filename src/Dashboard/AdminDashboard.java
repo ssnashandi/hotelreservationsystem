@@ -1,11 +1,13 @@
 package Dashboard;
 
-
+import Content.AdminWeclome;
 import Content.FifthPanel;
 import Content.FirstPanel;
 import Content.FourthPanel;
 import Content.SecondPanel;
 import Content.ThirdPanel;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javax.swing.JFrame;
 
 public class AdminDashboard extends javax.swing.JFrame {
@@ -16,6 +18,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     ThirdPanel c = new ThirdPanel();
     FourthPanel d = new FourthPanel();
     FifthPanel e = new FifthPanel(); // Instance of FifthPanel
+    AdminWeclome f = new AdminWeclome();
  
 
     public AdminDashboard() {
@@ -25,11 +28,13 @@ public class AdminDashboard extends javax.swing.JFrame {
         main.add(c);
         main.add(d);
         main.add(e);
+        main.add(f);
         a.setVisible(false);
         b.setVisible(false);
         c.setVisible(false);
         d.setVisible(false);
-        e.setVisible(false); // Show FifthPanel
+        e.setVisible(false);
+        f.setVisible(true);
 
         // Set the JFrame properties
         this.setSize(1000, 600); // Set the frame size
@@ -188,6 +193,17 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
     }
+    
+    // Database connection parameters (adjust these to your database)
+String url = "jdbc:mysql://localhost:3307/hotel_reservation"; // Your MySQL database URL
+String user = "Java"; // Your MySQL database username
+// Your MySQL database username
+String pass = "java17";
+
+public void loadUserData() {
+    String query = "SELECT * FROM Users"; // Replace 'Users' with your table name
+
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

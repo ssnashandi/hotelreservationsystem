@@ -7,8 +7,14 @@ import Content.FourthPanel;
 import Content.SecondPanel;
 import Content.ThirdPanel;
 import javax.swing.JFrame;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 public class Dashboard extends javax.swing.JFrame {
+    
+    private Connection conn;
+    private JTable table;
 
     // Panel instances
     FirstPanel a = new FirstPanel();
@@ -16,10 +22,15 @@ public class Dashboard extends javax.swing.JFrame {
     ThirdPanel c = new ThirdPanel();
     FourthPanel d = new FourthPanel();
     FifthPanel e = new FifthPanel(); // Instance of FifthPanel
+    
+    
+    
  
 
     public Dashboard() {
         initComponents(); // Initialize GUI components
+        connectToDatabase();
+        loadData();
         main.add(a);
         main.add(b);
         main.add(c);
@@ -41,6 +52,27 @@ public class Dashboard extends javax.swing.JFrame {
     // This method should correctly reference the instance of FifthPanel
     public void setWelcomeMessage(String username) {
         e.setWelcomeMessage(username); // Call the method on the FifthPanel instance
+    }
+    
+     private void connectToDatabase() {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/hotel_reservation", "Java", "java17");
+            System.out.println("Connected to the database.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database connection failed.");
+        }
+    }
+
+    private void loadData() {
+        try {
+            String query = "SELECT first_name FROM Guests WHERE email = ? AND password = ?";
+            PreparedStatement statement = conn.prepareStatement(query);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to load data.");
+        }
     }
 
     @SuppressWarnings("unchecked")
